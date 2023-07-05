@@ -55,18 +55,12 @@ namespace Disconnected_Environment
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            koneksi.Open();
-            string str = "select nama_prodi from dbo.Prodi";
-            SqlDataAdapter da = new SqlDataAdapter(str, koneksi);
-            DataSet ds = new DataSet();
-            da.Fill(ds);
-            dataGridView1.DataSource = ds.Tables[0];
-            koneksi.Close();
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            dataGridView1_CellContentClick();
+            dataGridView();
             btnOpen.Enabled = false;
         }
 
@@ -89,7 +83,7 @@ namespace Disconnected_Environment
 
                 koneksi.Close();
                 MessageBox.Show("Data Berhasil Disimpan", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                dataGridView1_CellContentClick();
+                dataGridView();
                 refreshform();
             }
         }
@@ -98,6 +92,16 @@ namespace Disconnected_Environment
             Form1 hu = new Form1();
             hu.Show();
             this.Hide();
+        }
+        private void dataGridView()
+        {
+            koneksi.Open();
+            string str = "select nama_prodi from dbo.Prodi";
+            SqlDataAdapter da = new SqlDataAdapter(str, koneksi);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0];
+            koneksi.Close();
         }
     }
 }
